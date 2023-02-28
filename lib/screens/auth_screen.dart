@@ -12,7 +12,7 @@ class AuthScreen extends StatefulWidget {
 }
 
 class AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
-  TextEditingController controllerEmail = TextEditingController(text: 'eduardkutermin@gmail.com');
+  TextEditingController controllerEmail = TextEditingController(text: 'isip_e.n.kutermin@mpt.ru');
   TextEditingController controllerPassword = TextEditingController(text: 'passWord11');
   GlobalKey<FormState> key = GlobalKey();
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -21,8 +21,8 @@ class AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
     try {
       ActionCodeSettings acs = ActionCodeSettings(
           url: 'https://herpderp11.page.link/HD?email=$email',
-          handleCodeInApp: true,
           androidPackageName: 'com.example.flutter_firebase',
+          handleCodeInApp: true,
           androidInstallApp: false);
       await FirebaseAuth.instance.sendSignInLinkToEmail(email: email, actionCodeSettings: acs).then((value) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('A link has been sent to your email', textAlign: TextAlign.center)));
@@ -37,7 +37,7 @@ class AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen())));
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Invalid email or password', textAlign: TextAlign.center)));
     }
   }
@@ -47,9 +47,8 @@ class AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
   }
 
   void getDynamicLinkAndSignIn() async {
-    PendingDynamicLinkData? dynamicLink = await FirebaseDynamicLinks.instance.onLink.first;
-
-    if (dynamicLink != null) {
+    PendingDynamicLinkData dynamicLink = await FirebaseDynamicLinks.instance.onLink.first;
+    try {
       String link = dynamicLink.link.toString();
       if (auth.isSignInWithEmailLink(link)) {
         String continueUrl = dynamicLink.link.queryParameters['continueUrl']!;
@@ -59,6 +58,8 @@ class AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
 
         Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
       }
+    } on FirebaseAuthException {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Current link was already used, try again', textAlign: TextAlign.center)));
     }
   }
 
