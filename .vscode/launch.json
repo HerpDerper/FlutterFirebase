@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "flutter_firebase",
+            "request": "launch",
+            "type": "dart"
+            // "args": ["-d", "web-server","--web-port", "8000"]
+        },
+        {
+            "name": "flutter_firebase (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter_firebase (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
