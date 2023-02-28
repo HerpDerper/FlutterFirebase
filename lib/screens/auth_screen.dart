@@ -12,8 +12,8 @@ class AuthScreen extends StatefulWidget {
 }
 
 class AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
-  TextEditingController controllerEmail = TextEditingController(text: 'isip_e.n.kutermin@mpt.ru');
-  TextEditingController controllerPassword = TextEditingController(text: 'passWord11');
+  TextEditingController controllerEmail = TextEditingController();
+  TextEditingController controllerPassword = TextEditingController();
   GlobalKey<FormState> key = GlobalKey();
   FirebaseAuth auth = FirebaseAuth.instance;
 
