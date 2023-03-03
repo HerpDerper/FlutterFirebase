@@ -16,7 +16,6 @@ class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: FirebaseAuth.instance.currentUser == null ? const AuthScreen() : const HomeScreen());
-  }
+  Widget build(BuildContext context) =>
+      MaterialApp(debugShowCheckedModeBanner: false, home: FirebaseAuth.instance.currentUser == null ? const AuthScreen() : const HomeScreen());
 }
