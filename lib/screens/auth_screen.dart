@@ -24,9 +24,8 @@ class AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
           androidPackageName: 'com.example.flutter_firebase',
           handleCodeInApp: true,
           androidInstallApp: false);
-      await FirebaseAuth.instance.sendSignInLinkToEmail(email: email, actionCodeSettings: acs).then((value) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('A link has been sent to your email', textAlign: TextAlign.center)));
-      });
+      await FirebaseAuth.instance.sendSignInLinkToEmail(email: email, actionCodeSettings: acs).then((value) =>
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('A link has been sent to your email', textAlign: TextAlign.center))));
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message.toString(), textAlign: TextAlign.center)));
     }
@@ -42,9 +41,8 @@ class AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
     }
   }
 
-  void authAnonymously() async {
-    await auth.signInAnonymously().then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen())));
-  }
+  void authAnonymously() async =>
+      await auth.signInAnonymously().then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen())));
 
   void getDynamicLinkAndSignIn() async {
     PendingDynamicLinkData dynamicLink = await FirebaseDynamicLinks.instance.onLink.first;

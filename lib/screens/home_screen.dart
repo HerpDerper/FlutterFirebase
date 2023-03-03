@@ -13,6 +13,11 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   FirebaseAuth auth = FirebaseAuth.instance;
 
+  void signOut() {
+    FirebaseAuth.instance.signOut();
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const AuthScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,13 +28,7 @@ class HomeScreenState extends State<HomeScreen> {
           children: [
             Text('You are ${auth.currentUser!.isAnonymous ? 'anonymous' : auth.currentUser!.email}', style: const TextStyle(color: Colors.white, fontSize: 20)),
             const Padding(padding: EdgeInsets.fromLTRB(25, 5, 25, 5)),
-            ElevatedButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const AuthScreen()));
-              },
-              child: const Text("Exit"),
-            )
+            ElevatedButton(onPressed: () => signOut(), child: const Text("Exit"))
           ],
         ),
       ),
