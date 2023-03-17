@@ -4,16 +4,20 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.18.6 <3.0.0"
+  sdk: '>=2.18.6 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
+  
+  intl: ^0.17.0
   cupertino_icons: ^1.0.2
-
-  firebase_auth: ^3.6.3
-  firebase_dynamic_links: any
-  firebase_core: ^1.20.1
+  firebase_auth: ^4.2.10
+  firebase_storage: ^11.0.15
+  cloud_firestore: ^4.4.4
+  firebase_core: ^2.7.1
+  image_picker: ^0.8.7
+  image_cropper: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -24,3 +28,6 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - images/
