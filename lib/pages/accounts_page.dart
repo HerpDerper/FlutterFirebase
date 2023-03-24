@@ -48,6 +48,15 @@ class AccountsPageState extends State<AccountsPage> {
                       leading: FutureBuilder(
                         future: _getAccountsImage(account.image),
                         builder: (context, snapshotImage) {
+                          if (snapshotImage.connectionState == ConnectionState.waiting) {
+                            return const CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.transparent,
+                              child: CircularProgressIndicator(
+                                color: Color.fromARGB(255, 123, 118, 155),
+                              ),
+                            );
+                          }
                           return CircleAvatar(
                             radius: 30,
                             backgroundColor: Colors.deepPurple,
@@ -57,16 +66,12 @@ class AccountsPageState extends State<AccountsPage> {
                             child: CircleAvatar(
                               radius: 27,
                               backgroundColor: Colors.transparent,
-                              child: Builder(
-                                builder: (context) {
-                                  return Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: CircleAvatar(
-                                      backgroundColor: account.status ? Colors.green : Colors.transparent,
-                                      radius: 7,
-                                    ),
-                                  );
-                                },
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: CircleAvatar(
+                                  backgroundColor: account.status ? Colors.green : Colors.transparent,
+                                  radius: 7,
+                                ),
                               ),
                             ),
                           );
