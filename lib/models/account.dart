@@ -10,7 +10,7 @@ class Account {
   bool status;
 
   Account(
-      {this.id, required this.email, required this.userName, required this.password, required this.birthDate, this.image = 'default.png', this.status = true});
+      {this.id, required this.email, required this.userName, required this.password, required this.birthDate, this.image = 'default.gif', this.status = true});
 
   Map<String, dynamic> toJson() => {'email': email, 'userName': userName, 'password': password, 'birthDate': birthDate, 'image': image, 'status': status};
 

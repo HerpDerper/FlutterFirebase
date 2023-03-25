@@ -124,6 +124,9 @@ class AccountController {
   void _uploadFile(File image) async {
     String imageName = '${DateTime.now().millisecondsSinceEpoch}.jpeg';
     await FirebaseUtils.storage.ref().child(imageName).putFile(image);
+    if (account!.image != 'default.gif') {
+      FirebaseUtils.storage.ref().child(account!.image).delete();
+    }
     account!.image = imageName;
     FirebaseUtils.setCollection('Accounts');
     FirebaseFirestore.instance.collection('Accounts').doc(FirebaseUtils.auth.currentUser!.uid).set(account!.toJson());

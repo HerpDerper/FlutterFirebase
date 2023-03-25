@@ -33,39 +33,39 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB-YcZjPgs7A-pmxo0jKFEAInkogI2HY4U',
-    appId: '1:1056719233812:web:9b39cd15dfdfe6ee125801',
-    messagingSenderId: '1056719233812',
-    projectId: 'fluttervideocall-3f317',
-    authDomain: 'fluttervideocall-3f317.firebaseapp.com',
-    storageBucket: 'fluttervideocall-3f317.appspot.com',
+    apiKey: 'AIzaSyBqIsjg6uVyH9Wv-jzwrQgDpEo5kiulugI',
+    appId: '1:364626133532:web:78946b9f9e5586f4ed95d9',
+    messagingSenderId: '364626133532',
+    projectId: 'flutter-413a4',
+    authDomain: 'flutter-413a4.firebaseapp.com',
+    storageBucket: 'flutter-413a4.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBnGbnH52fxj-CCs_RMazI3N_qEDXS_oZE',
-    appId: '1:1056719233812:android:bc4e8d9040523c30125801',
-    messagingSenderId: '1056719233812',
-    projectId: 'fluttervideocall-3f317',
-    storageBucket: 'fluttervideocall-3f317.appspot.com',
+    apiKey: 'AIzaSyDfoDtYZGrGff3YpRBTMf-MAYBu8fp7jmg',
+    appId: '1:364626133532:android:f243ae7bd0aa9678ed95d9',
+    messagingSenderId: '364626133532',
+    projectId: 'flutter-413a4',
+    storageBucket: 'flutter-413a4.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBCDvExiCfjKuUPCRmROSOaH7HxI8elNOg',
-    appId: '1:1056719233812:ios:06f0cd221bb9f396125801',
-    messagingSenderId: '1056719233812',
-    projectId: 'fluttervideocall-3f317',
-    storageBucket: 'fluttervideocall-3f317.appspot.com',
-    iosClientId: '1056719233812-ovhi566chc4g28dq0qs4om5g7dau6jke.apps.googleusercontent.com',
-    iosBundleId: 'com.example.flutterVideoCall',
+    apiKey: 'AIzaSyC-ciB3irtVhKTlGLfFOM0CNzyTWGpLKHk',
+    appId: '1:364626133532:ios:459d9859e30c61a1ed95d9',
+    messagingSenderId: '364626133532',
+    projectId: 'flutter-413a4',
+    storageBucket: 'flutter-413a4.appspot.com',
+    iosClientId: '364626133532-t6gdgk9ce6pu2l5cmqsc0jlbh2nvt9nf.apps.googleusercontent.com',
+    iosBundleId: 'com.example.flutterFirebase',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBCDvExiCfjKuUPCRmROSOaH7HxI8elNOg',
-    appId: '1:1056719233812:ios:06f0cd221bb9f396125801',
-    messagingSenderId: '1056719233812',
-    projectId: 'fluttervideocall-3f317',
-    storageBucket: 'fluttervideocall-3f317.appspot.com',
-    iosClientId: '1056719233812-ovhi566chc4g28dq0qs4om5g7dau6jke.apps.googleusercontent.com',
-    iosBundleId: 'com.example.flutterVideoCall',
+    apiKey: 'AIzaSyC-ciB3irtVhKTlGLfFOM0CNzyTWGpLKHk',
+    appId: '1:364626133532:ios:459d9859e30c61a1ed95d9',
+    messagingSenderId: '364626133532',
+    projectId: 'flutter-413a4',
+    storageBucket: 'flutter-413a4.appspot.com',
+    iosClientId: '364626133532-t6gdgk9ce6pu2l5cmqsc0jlbh2nvt9nf.apps.googleusercontent.com',
+    iosBundleId: 'com.example.flutterFirebase',
   );
 }

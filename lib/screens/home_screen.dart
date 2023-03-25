@@ -16,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   int currentIndex = 0;
   late AccountController controller;
-  final List<Widget> pages = const [FilesPage(), AccountsPage(), ProfilePage()];
 
   @override
   void initState() {
@@ -60,15 +59,15 @@ class HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         selectedItemColor: Colors.purple,
         unselectedItemColor: Colors.white,
         currentIndex: currentIndex,
-        items: const [
-          BottomNavigationBarItem(
+        items: [
+          const BottomNavigationBarItem(
             label: '',
             icon: Icon(
               size: 30,
-              Icons.file_present_sharp,
+              Icons.forum_rounded,
             ),
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             label: '',
             icon: Icon(
               size: 30,
@@ -77,9 +76,41 @@ class HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           ),
           BottomNavigationBarItem(
             label: '',
-            icon: Icon(
-              size: 30,
-              Icons.person,
+            icon: StreamBuilder(
+              stream: controller.getAccount(),
+              builder: (context, snapshotAccount) {
+                if (snapshotAccount.hasData) {
+                  controller.account = snapshotAccount.data!;
+                  controller.updateStatus(true);
+                }
+                return FutureBuilder(
+                  future: controller.getAccountImage(),
+                  builder: (context, snapshotImage) {
+                    return CircleAvatar(
+                      radius: 15,
+                      backgroundColor: Colors.transparent,
+                      backgroundImage: NetworkImage(
+                        snapshotImage.data.toString(),
+                      ),
+                      child: CircleAvatar(
+                        radius: 13.5,
+                        backgroundColor: Colors.transparent,
+                        child: Builder(
+                          builder: (context) {
+                            return Align(
+                              alignment: Alignment.bottomRight,
+                              child: CircleAvatar(
+                                backgroundColor: controller.account!.status ? Colors.green : Colors.grey,
+                                radius: 3,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
             ),
           ),
         ],
