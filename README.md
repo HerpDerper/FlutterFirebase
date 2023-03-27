@@ -3,17 +3,22 @@
 Цель работы: Реализовать приложение с использование FirebaseAuth и FirebaseFirestore.
 Ход работы:
 Создаем экран авторизации.\
-![image](https://user-images.githubusercontent.com/82903497/225839834-e9e249dc-6714-4b6f-bc8b-9945e81dfc7d.png)\
+![image](https://user-images.githubusercontent.com/82903497/227999662-3109ab54-2958-46d9-9e4d-559e93995c78.png)\
 Создаем экран регистрации.\
-![image](https://user-images.githubusercontent.com/82903497/225839756-cae8ee0b-12c4-4ac7-9c06-2593a4fd5202.png)\
+![image](https://user-images.githubusercontent.com/82903497/227999549-f0f1d876-1eab-4224-a745-d01255a41eb8.png)\
 Создаем экран пользователя.\
-![image](https://user-images.githubusercontent.com/82903497/225839937-a0b75074-cb49-4f44-a8e7-42cc6e3e753c.png)\
-Проверяем работоспособность экрана регистрации.\
-![image](https://user-images.githubusercontent.com/82903497/225840467-cc9077e2-7b24-4a04-beb3-8f167338d2bd.png)\
-Проверяем работоспособность экрана авторизации.\
-![image](https://user-images.githubusercontent.com/82903497/225840520-c1e014e9-3b8d-49c2-965b-da1b8fbadc16.png)\
-Проверяем работоспособность окна вывода данных.\
-![image](https://user-images.githubusercontent.com/82903497/225840555-b2bc321b-c967-415a-a292-9da1e62a8ae9.png)\
-Проверяем работоспособность окна пользователя.\
-![image](https://user-images.githubusercontent.com/82903497/225840593-77a92d46-d9d7-44c5-88a3-17eeab719df3.png)\
+![image](https://user-images.githubusercontent.com/82903497/227999979-ab3d6450-4261-4747-9ed8-4a0da50427d0.png)\
+Создаем экран вывода данных.\
+![image](https://user-images.githubusercontent.com/82903497/227999844-602c2484-2b89-490a-83fd-6decada26e49.png)\
+
 Вывод: В процессе выполнения данной практической работы было реализовано приложение с использование FirebaseAuth и FirebaseFirestore.
+
+# Практическая работа 10
+
+Цель работы: Реализовать приложение с использование Cloud Firestore, Firebase Storage и FirebaseAuth.
+Ход работы:
+Добавляем выбор и редактирование изображения.\
+![image](https://user-images.githubusercontent.com/82903497/227998994-ed07c048-65b9-416e-943b-d44e33ede5f0.png)\
+Добавляем вывод всех изображений.\
+![image](https://user-images.githubusercontent.com/82903497/227999256-7e914512-4e4e-4dbf-af66-a7df49825d15.png)\
+Вывод: В процессе выполнения данной практической работы было реализовано приложение с использование Cloud Firestore, Firebase Storage и FirebaseAuth.
