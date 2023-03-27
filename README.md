@@ -1,6 +1,6 @@
 # Практическая работа 9
 
-Цель работы: Реализовать приложение с использование FirebaseAuth и FirebaseFirestore.
+Цель работы: Реализовать приложение с использование FirebaseAuth и FirebaseFirestore.  
 Ход работы:\
 Создаем экран авторизации.\
 ![image](https://user-images.githubusercontent.com/82903497/227999662-3109ab54-2958-46d9-9e4d-559e93995c78.png)\
@@ -15,7 +15,7 @@
 
 # Практическая работа 10
 
-Цель работы: Реализовать приложение с использование Cloud Firestore, Firebase Storage и FirebaseAuth.
+Цель работы: Реализовать приложение с использование Cloud Firestore, Firebase Storage и FirebaseAuth.  
 Ход работы:\
 Добавляем выбор и редактирование изображения.\
 ![image](https://user-images.githubusercontent.com/82903497/227998994-ed07c048-65b9-416e-943b-d44e33ede5f0.png)\
