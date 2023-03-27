@@ -15,11 +15,10 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   int currentIndex = 0;
-  late AccountController controller;
+  late AccountController controller = AccountController(context: context, account: Account(email: '', userName: '', password: '', birthDate: ''));
 
   @override
   void initState() {
-    controller = AccountController(context: context, account: Account(email: '', userName: '', password: '', birthDate: ''));
     super.initState();
     WidgetsBinding.instance.addObserver(this);
   }
@@ -64,7 +63,7 @@ class HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             label: '',
             icon: Icon(
               size: 30,
-              Icons.forum_rounded,
+              Icons.filter_sharp,
             ),
           ),
           const BottomNavigationBarItem(
@@ -80,7 +79,7 @@ class HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               stream: controller.getAccount(),
               builder: (context, snapshotAccount) {
                 if (snapshotAccount.hasData) {
-                  controller.account = snapshotAccount.data!;
+                  controller.account = snapshotAccount.data;
                   controller.updateStatus(true);
                 }
                 return FutureBuilder(
@@ -95,16 +94,9 @@ class HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       child: CircleAvatar(
                         radius: 13.5,
                         backgroundColor: Colors.transparent,
-                        child: Builder(
-                          builder: (context) {
-                            return Align(
-                              alignment: Alignment.bottomRight,
-                              child: CircleAvatar(
-                                backgroundColor: controller.account!.status ? Colors.green : Colors.grey,
-                                radius: 3,
-                              ),
-                            );
-                          },
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: CircleAvatar(backgroundColor: controller.account!.status ? Colors.green : Colors.grey, radius: 3),
                         ),
                       ),
                     );

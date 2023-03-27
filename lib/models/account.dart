@@ -2,11 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Account {
   String? id;
-  String email;
-  String userName;
-  String password;
-  String birthDate;
-  String image;
+  String email, userName, password, birthDate, image;
   bool status;
 
   Account(
@@ -16,12 +12,13 @@ class Account {
 
   static Account fromSnapshot(DocumentSnapshot snapshot) {
     return Account(
-        id: snapshot.id,
-        email: snapshot['email'],
-        userName: snapshot['userName'],
-        password: snapshot['password'],
-        birthDate: snapshot['birthDate'],
-        image: snapshot['image'],
-        status: snapshot['status']);
+      id: snapshot.id,
+      email: snapshot['email'],
+      userName: snapshot['userName'],
+      password: snapshot['password'],
+      birthDate: snapshot['birthDate'],
+      image: snapshot['image'],
+      status: snapshot['status'],
+    );
   }
 }

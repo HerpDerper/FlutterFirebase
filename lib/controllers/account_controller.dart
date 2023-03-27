@@ -53,7 +53,7 @@ class AccountController {
       account!.email = email;
       await FirebaseUtils.auth.currentUser!.updateEmail(email);
       FirebaseUtils.setCollection('Accounts');
-      FirebaseUtils.collection.doc(FirebaseUtils.auth.currentUser!.uid).set(account!.toJson()).then((value) {});
+      FirebaseUtils.collection.doc(FirebaseUtils.auth.currentUser!.uid).set(account!.toJson());
       AppUtils.switchScreen(const AuthScreen(), context);
       AppUtils.showInfoMessage('Success', context);
     } on FirebaseAuthException {
@@ -61,12 +61,9 @@ class AccountController {
     }
   }
 
-  void updateStatus(bool status) {
-    if (FirebaseUtils.auth.currentUser != null) {
-      account!.status = status;
-      FirebaseUtils.setCollection('Accounts');
-      FirebaseUtils.collection.doc(FirebaseUtils.auth.currentUser!.uid).set(account!.toJson());
-    }
+  Future<void> updateStatus(bool status) async {
+    FirebaseUtils.setCollection('Accounts');
+    FirebaseUtils.collection.doc(FirebaseUtils.auth.currentUser!.uid).update({'status': status});
   }
 
   void updateUsername(String username, String password) {
