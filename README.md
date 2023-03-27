@@ -15,5 +15,5 @@
 Проверяем работоспособность окна вывода данных.\
 ![image](https://user-images.githubusercontent.com/82903497/225840555-b2bc321b-c967-415a-a292-9da1e62a8ae9.png)\
 Проверяем работоспособность окна пользователя.\
-![image](https://user-images.githubusercontent.com/82903497/225840593-77a92d46-d9d7-44c5-88a3-17eeab719df3.png = 600x800)\
+![image](https://user-images.githubusercontent.com/82903497/225840593-77a92d46-d9d7-44c5-88a3-17eeab719df3.png = 200x300)\
 Вывод: В процессе выполнения данной практической работы было реализовано приложение с использование FirebaseAuth и FirebaseFirestore.
