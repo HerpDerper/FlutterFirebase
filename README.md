@@ -20,5 +20,5 @@
 Добавляем выбор и редактирование изображения.\
 ![image](https://user-images.githubusercontent.com/82903497/227998994-ed07c048-65b9-416e-943b-d44e33ede5f0.png)\
 Добавляем вывод всех изображений.\
-![image](https://user-images.githubusercontent.com/82903497/227999256-7e914512-4e4e-4dbf-af66-a7df49825d15.png)\
+![image](https://user-images.githubusercontent.com/82903497/228021555-10ae6c72-719a-4d00-814c-2b3719509c4b.png)\
 Вывод: В процессе выполнения данной практической работы было реализовано приложение с использование Cloud Firestore, Firebase Storage и FirebaseAuth.
