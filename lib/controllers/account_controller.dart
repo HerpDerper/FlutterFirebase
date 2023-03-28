@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/account.dart';
 import '../utils/app_utils.dart';
@@ -16,25 +15,27 @@ class AccountController {
 
   AccountController({required this.context, this.account});
 
+  Stream<Account> getAccount() {
+    FirebaseUtils.setCollection('Accounts');
+    return FirebaseUtils.collection.doc(FirebaseUtils.auth.currentUser!.uid).snapshots().map((snapshot) {
+      account = Account.fromSnapshot(snapshot);
+      return account!;
+    });
+  }
+
+  Future<String> getAccountImage() => FirebaseUtils.storage.ref().child(account!.image).getDownloadURL();
+
   void createAccount(String email, String userName, String password, String birthDate) async {
     try {
       await FirebaseUtils.auth.createUserWithEmailAndPassword(email: email, password: password).then((newUser) {
-        Account account = Account(email: email, userName: userName, password: password, birthDate: birthDate);
         FirebaseUtils.setCollection('Accounts');
-        FirebaseUtils.collection.doc(newUser.user!.uid).set(account.toJson());
+        FirebaseUtils.collection.doc(newUser.user!.uid).set(Account(email: email, userName: userName, password: password, birthDate: birthDate).toJson());
         AppUtils.switchScreen(const HomeScreen(), context);
       });
     } on FirebaseAuthException {
       AppUtils.showInfoMessage('Current email is already in use', context);
     }
   }
-
-  Stream<Account> getAccount() {
-    FirebaseUtils.setCollection('Accounts');
-    return FirebaseUtils.collection.doc(FirebaseUtils.auth.currentUser!.uid).snapshots().map((snapshot) => Account.fromSnapshot(snapshot));
-  }
-
-  Future<String> getAccountImage() => FirebaseUtils.storage.ref().child(account!.image).getDownloadURL();
 
   Future updateImage() async {
     final image = await ImageUtils.pickImage();
@@ -54,16 +55,16 @@ class AccountController {
       await FirebaseUtils.auth.currentUser!.updateEmail(email);
       FirebaseUtils.setCollection('Accounts');
       FirebaseUtils.collection.doc(FirebaseUtils.auth.currentUser!.uid).set(account!.toJson());
-      AppUtils.switchScreen(const AuthScreen(), context);
-      AppUtils.showInfoMessage('Success', context);
-    } on FirebaseAuthException {
-      AppUtils.showInfoMessage('Current email is already in use', context);
+      FirebaseUtils.auth.signInWithEmailAndPassword(email: email, password: password).then((_) => AppUtils.showInfoMessage('Success', context));
+    } on FirebaseAuthException catch (e) {
+      AppUtils.showInfoMessage(e.message.toString(), context);
     }
   }
 
-  Future<void> updateStatus(bool status) async {
+  void updateStatus(bool status) {
+    account!.status = status;
     FirebaseUtils.setCollection('Accounts');
-    FirebaseUtils.collection.doc(FirebaseUtils.auth.currentUser!.uid).update({'status': status});
+    FirebaseUtils.collection.doc(FirebaseUtils.auth.currentUser!.uid).set(account!.toJson());
   }
 
   void updateUsername(String username, String password) {
@@ -94,8 +95,7 @@ class AccountController {
     FirebaseUtils.setCollection('Accounts');
     await FirebaseUtils.auth.currentUser!.updatePassword(newPassword);
     FirebaseUtils.collection.doc(FirebaseUtils.auth.currentUser!.uid).set(account!.toJson());
-    AppUtils.switchScreen(const AuthScreen(), context);
-    AppUtils.showInfoMessage('Success', context);
+    FirebaseUtils.auth.signInWithEmailAndPassword(email: account!.password, password: account!.email).then((_) => AppUtils.showInfoMessage('Success', context));
   }
 
   void deleteAccount() {
@@ -107,7 +107,7 @@ class AccountController {
 
   void signIn(String email, String password) async {
     try {
-      await FirebaseUtils.auth.signInWithEmailAndPassword(email: email, password: password).then((user) => AppUtils.switchScreen(const HomeScreen(), context));
+      await FirebaseUtils.auth.signInWithEmailAndPassword(email: email, password: password).then((_) => AppUtils.switchScreen(const HomeScreen(), context));
     } on FirebaseAuthException {
       AppUtils.showInfoMessage('Invalid email or password', context);
     }
@@ -121,11 +121,8 @@ class AccountController {
   void _uploadFile(File image) async {
     String imageName = '${DateTime.now().millisecondsSinceEpoch}.jpeg';
     await FirebaseUtils.storage.ref().child(imageName).putFile(image);
-    if (account!.image != 'default.gif') {
-      FirebaseUtils.storage.ref().child(account!.image).delete();
-    }
     account!.image = imageName;
     FirebaseUtils.setCollection('Accounts');
-    FirebaseFirestore.instance.collection('Accounts').doc(FirebaseUtils.auth.currentUser!.uid).set(account!.toJson());
+    FirebaseUtils.collection.doc(FirebaseUtils.auth.currentUser!.uid).set(account!.toJson());
   }
 }
