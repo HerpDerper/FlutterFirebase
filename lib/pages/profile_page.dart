@@ -47,8 +47,9 @@ class ProfilePageState extends State<ProfilePage> {
                         ),
                       );
                     }
-                    return InkWell(
+                    return GestureDetector(
                       onTap: () => controller.updateImage(),
+                      onLongPress: () => controller.deleteImage(),
                       child: CircleAvatar(
                         radius: 50,
                         backgroundColor: Colors.transparent,

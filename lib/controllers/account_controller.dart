@@ -105,6 +105,13 @@ class AccountController {
     AppUtils.switchScreen(const AuthScreen(), context);
   }
 
+  void deleteImage() {
+    FirebaseUtils.setCollection('Accounts');
+    account!.image = 'default.gif';
+    FirebaseUtils.collection.doc(FirebaseUtils.auth.currentUser!.uid).set(account!.toJson());
+    AppUtils.switchScreen(const AuthScreen(), context);
+  }
+
   void signIn(String email, String password) async {
     try {
       await FirebaseUtils.auth.signInWithEmailAndPassword(email: email, password: password).then((_) => AppUtils.switchScreen(const HomeScreen(), context));
