@@ -11,11 +11,13 @@ class FilesPage extends StatefulWidget {
 }
 
 class FilesPageState extends State<FilesPage> {
-  late Stream<ListResult> images;
+  late Future<ListResult> images;
 
-  Stream<ListResult> _getFiles() => FirebaseUtils.storage.ref().listAll().asStream();
+  Future<ListResult> _getFiles() => FirebaseUtils.storage.ref().listAll();
 
   Future<void> _pullRefresh() async => setState(() => images = _getFiles());
+
+  void _deleteImageByName(String imageName) => FirebaseUtils.storage.ref().child(imageName).delete();
 
   @override
   void initState() {
@@ -28,8 +30,8 @@ class FilesPageState extends State<FilesPage> {
     return RefreshIndicator(
       onRefresh: _pullRefresh,
       child: Center(
-        child: StreamBuilder(
-          stream: images,
+        child: FutureBuilder(
+          future: images,
           builder: (context, snapshotFiles) {
             if (snapshotFiles.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator(
@@ -41,31 +43,35 @@ class FilesPageState extends State<FilesPage> {
                 (image) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                    child: Card(
-                      color: Colors.deepPurple,
-                      child: ListTile(
-                        textColor: Colors.white,
-                        title: Text(image.name),
-                        leading: FutureBuilder(
-                          future: image.getDownloadURL(),
-                          builder: (context, snapshotImage) {
-                            if (snapshotImage.connectionState == ConnectionState.waiting) {
-                              return const CircleAvatar(
+                    child: Dismissible(
+                      key: Key(image.name),
+                      onDismissed: (direction) => setState(() => _deleteImageByName(image.name)),
+                      child: Card(
+                        color: Colors.deepPurple,
+                        child: ListTile(
+                          textColor: Colors.white,
+                          title: Text(image.name),
+                          leading: FutureBuilder(
+                            future: image.getDownloadURL(),
+                            builder: (context, snapshotImage) {
+                              if (snapshotImage.connectionState == ConnectionState.waiting) {
+                                return const CircleAvatar(
+                                  radius: 30,
+                                  backgroundColor: Colors.transparent,
+                                  child: CircularProgressIndicator(
+                                    color: Color.fromARGB(255, 123, 118, 155),
+                                  ),
+                                );
+                              }
+                              return CircleAvatar(
                                 radius: 30,
-                                backgroundColor: Colors.transparent,
-                                child: CircularProgressIndicator(
-                                  color: Color.fromARGB(255, 123, 118, 155),
+                                backgroundColor: Colors.deepPurple,
+                                backgroundImage: NetworkImage(
+                                  snapshotImage.data.toString(),
                                 ),
                               );
-                            }
-                            return CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.deepPurple,
-                              backgroundImage: NetworkImage(
-                                snapshotImage.data.toString(),
-                              ),
-                            );
-                          },
+                            },
+                          ),
                         ),
                       ),
                     ),
